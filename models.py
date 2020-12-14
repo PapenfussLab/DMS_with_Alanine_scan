@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import GPyOpt
 import pickle
@@ -105,6 +106,7 @@ def _tune_by_bayesian_optimization(
     num_cores,
     if_maximize,
     output_header=None,
+    random_seed=None,
 ):
     """Find the best hyper-parameters within given range using Bayesian optimization.
 
@@ -135,11 +137,16 @@ def _tune_by_bayesian_optimization(
     output_header: str, optional(default=None)
         If it is not None, it indicates the directory and file name prefix for the reporting files.
 
+    random_seed: None or int, optional(default=None)
+        Seed of random state which will be put into np.random.seed. It will determine the random initial
+        searching points for Bayesian optimization.
+
     Returns
     -------
     tuned_hp: dict
         A dict whose keys are the hyper-parameters tuned and values are the optimized values.
     """
+    np.random.seed(random_seed)
     # An initial 5 point running will be done.
     gpyopt_bo = GPyOpt.methods.BayesianOptimization(
         f=eval_hp_func,
@@ -190,7 +197,8 @@ def fit_best_estimator(search_space, estimator, trainx, trainy, cv_kwargs, bo_kw
 
     bo_kwargs: dict
         Keyword arguments to be used for Bayesian optimization tuning. It is a dict with output_header,
-        num_cores, if_maximize and num_iterations as keys. Details can be found in _tune_hyperparameters.
+        num_cores, if_maximize, num_iterations and random_seed as keys. Details can be found in
+        _tune_hyperparameters.
 
     Returns
     -------
