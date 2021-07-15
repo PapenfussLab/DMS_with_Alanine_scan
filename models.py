@@ -40,7 +40,7 @@ def _create_hp_dict(value_list, search_space):
 
 
 def _create_evaluation_function(search_space, estimator, trainx, trainy, cv_kwargs):
-    """Return a function which can evaluate the prediction error of given hyper-parameter.
+    """Return a function which evaluates the model trained by given hyper-parameter by cross-validation.
 
     Parameters
     ----------
@@ -69,37 +69,46 @@ def _create_evaluation_function(search_space, estimator, trainx, trainy, cv_kwar
     Returns
     -------
     evaluate_hyperparameters: function
-        A function to calculate cross-validation prediction error of the model trained using given training
-        data and model information.
-        This function takes a two dimensional array whose second dimension represents the selected
-        hyper-parameter values in the same order as search_space.
-        It returns the mean score of the validation data using the model trained by current hyper-parameters.
+        A function to calculate cross-validation evaluate the model trained using given training data and
+        model information.
+        This function takes a two dimensional array whose first dimension represents the input iteration
+        batch. And the second dimension shows the selected hyper-parameter values in the same order as
+        search_space.
+        It returns a 2D array saving the validation y values (each as an array) trained by current input
+        hyper-parameters for each iteration.
     """
 
     def evaluate_hyperparameters(hyperparam):
-        """Calculate cross-validation prediction error of the model trained by input hyper-parameters.
+        """Evaluate the model trained by input hyper-parameters.
 
         Parameters
         ----------
         hyperparam: np.array
-            A two dimensional array whose second dimension represents the selected hyper-parameter
-            values in the same order as search_space.
+            It is a two dimensional array whose first dimension represents the input iteration batch.
+            And the second dimension represents the selected hyper-parameter values in the same order as
+            search_space.
 
         Returns
         -------
-        mean_cv_score: float
-            Mean score of the validation data using the model trained by current hyper-parameters.
+        scores: np.array
+            It is a 2D array saving the validation y values (each as an array) trained by current
+            input hyper-parameters for each iteration.
         """
-        hp_dict = _create_hp_dict(hyperparam[0], search_space)
-        estimator.set_params(**hp_dict)
-        # Fit and calculate the mean score with cross-validation using the input hyper-parameters.
-        mean_cv_score = cross_val_score(estimator, trainx, trainy, **cv_kwargs).mean()
-        return mean_cv_score
+        scores = []
+        for hp in hyperparam:
+            hp_dict = _create_hp_dict(hp, search_space)
+            estimator.set_params(**hp_dict)
+            # Fit and calculate the mean score with cross-validation using the input hyper-parameters.
+            mean_cv_score = cross_val_score(
+                estimator, trainx, trainy, **cv_kwargs
+            ).mean()
+            scores.append([mean_cv_score])
+        return np.array(scores)
 
     return evaluate_hyperparameters
 
 
-def _tune_by_bayesian_optimization(
+def _tune_by_gpopt(
     search_space,
     eval_hp_func,
     num_iterations,
@@ -107,8 +116,10 @@ def _tune_by_bayesian_optimization(
     if_maximize,
     output_header=None,
     random_seed=None,
+    max_time=np.inf,
+    eps=1e-8,
 ):
-    """Find the best hyper-parameters within given range using Bayesian optimization.
+    """Find the best hyper-parameters within given range using GPyOpt Bayesian optimization.
 
     Parameters
     ----------
@@ -133,6 +144,11 @@ def _tune_by_bayesian_optimization(
     if_maximize: bool
         If true, the model is trying to maximize the value of evaluation output. The metric for evaluation
         is determined by 'scoring' in cv_kwargs in eval_kwargs.
+        Comment: GPyOpt handle this parameter using a trick. Its default setting is to minimize the observation
+        function as if it's measured by prediction error. While trying to maximize it instead, the package
+        split get the opposite value of the function output it still try to minimize it in essence.
+        Unfortunately, the reporting files are recording these flipped value which makes it quite hard
+        to interpret the maximized results.
 
     output_header: str, optional(default=None)
         If it is not None, it indicates the directory and file name prefix for the reporting files.
@@ -140,6 +156,12 @@ def _tune_by_bayesian_optimization(
     random_seed: None or int, optional(default=None)
         Seed of random state which will be put into np.random.seed. It will determine the random initial
         searching points for Bayesian optimization.
+
+    max_time: int or np.inf, optional(default=np.inf)
+        Maximum exploration horizon in seconds.
+
+    eps: float, optional(default=1e-8)
+        Minimum distance between two consecutive hyper-parameters to stop.
 
     Returns
     -------
@@ -160,7 +182,11 @@ def _tune_by_bayesian_optimization(
         ef = output_header + "evaluation.txt"
     # Extra running.
     gpyopt_bo.run_optimization(
-        max_iter=num_iterations, report_file=rf, evaluations_file=ef
+        max_iter=num_iterations,
+        report_file=rf,
+        evaluations_file=ef,
+        max_time=max_time,
+        eps=eps,
     )
     if output_header is not None:
         gpyopt_bo.plot_convergence(filename=output_header + "converg.png")
@@ -168,7 +194,14 @@ def _tune_by_bayesian_optimization(
     return tuned_hp
 
 
-def fit_best_estimator(search_space, estimator, trainx, trainy, cv_kwargs, bo_kwargs):
+def fit_best_estimator(
+    search_space,
+    estimator,
+    trainx,
+    trainy,
+    cv_kwargs,
+    bo_kwargs,
+):
     """Fit training data to the estimator with best hyper-parameter found by Bayesian optimization tuning.
 
     Parameters
@@ -191,14 +224,14 @@ def fit_best_estimator(search_space, estimator, trainx, trainy, cv_kwargs, bo_kw
         Experimental score values for training data.
 
     cv_kwargs: dict
-        A dictionary indicating the parameter values to be put into sklearn.model_selection_cross_val_score.
+        A dictionary indicating the parameter values to be put into sklearn.model_selection.cross_val_score.
         Keys usually include: cv, scoring, group, n_jobs and fit_params, which can be used to identify
         sample_weight.
 
     bo_kwargs: dict
         Keyword arguments to be used for Bayesian optimization tuning. It is a dict with output_header,
-        num_cores, if_maximize, num_iterations and random_seed as keys. Details can be found in
-        _tune_hyperparameters.
+        num_cores, if_maximize, num_iterations, random_seed, max_time, etc., as keys. Details can be found
+        in corresponding tuning functions.
 
     Returns
     -------
@@ -208,30 +241,11 @@ def fit_best_estimator(search_space, estimator, trainx, trainy, cv_kwargs, bo_kw
     eval_hp_func = _create_evaluation_function(
         search_space, estimator, trainx, trainy, cv_kwargs
     )
-    tuned_hp = _tune_by_bayesian_optimization(search_space, eval_hp_func, **bo_kwargs)
+    tuned_hp = _tune_by_gpopt(search_space, eval_hp_func, **bo_kwargs)
     best_estimator = estimator.set_params(**tuned_hp).fit(
         trainx, trainy, cv_kwargs["fit_params"]["sample_weight"]
     )
     return best_estimator
-
-
-def split_tr_te(dms_data, tr_te_indices):
-    """Split dms_data into training and testing data.
-
-    Parameters
-    ----------
-    dms_data: pd.DataFrame
-    tr_te_indices: list
-        Indices of training and testing data.
-
-    Returns
-    -------
-    train_data: pd.DataFrame
-    test_data: pd.DataFrame
-    """
-    train_data = dms_data.loc[tr_te_indices[0]]
-    test_data = dms_data.loc[tr_te_indices[1]]
-    return train_data, test_data
 
 
 def save_predictor(predictor, output_header):
