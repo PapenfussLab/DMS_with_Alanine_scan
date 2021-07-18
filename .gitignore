@@ -1,2 +1,5 @@
 *.pyc
 data/processed/dms_as_data.csv
+*.DS_Store
+*.ipynb_checkpoints/*
+jupyter_code/.ipynb_checkpoints/

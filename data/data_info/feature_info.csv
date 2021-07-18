@@ -1,4 +1,9 @@
 feature,type,feature_name
+aa1,Physicochemical feature,WT amino scid
+aa2,Physicochemical feature,MT amino scid
+wt_mut,Physicochemical feature,Amino acid change
+aa1_polarity,Physicochemical feature,WT Polarity
+aa2_polarity,Physicochemical feature,MT Polarity
 aa1_PI,Physicochemical feature,WT pI
 aa2_PI,Physicochemical feature,MT pI
 deltaPI,Physicochemical feature,pI change
@@ -13,6 +18,8 @@ aa1_psic,Evolutionary feature,WT likelihood
 aa2_psic,Evolutionary feature,MT likelihood
 delta_psic,Evolutionary feature,Likelihood change
 accessibility,Structural feature,Solvent accessibility
+dssp_sec_str,Structural feature,Secondary structure
+phi_psi_reg,Structural feature,Phi-psi angle region
 delta_solvent_accessibility,Structural feature,Accessibility change
 b_factor,Structural feature,B factor
 mut_msa_congruency,Evolutionary feature,MSA substitution score
@@ -459,14 +466,14 @@ dssp_sec_str_H,Structural feature,Secondary structure is H
 dssp_sec_str_I,Structural feature,Secondary structure is I
 dssp_sec_str_S,Structural feature,Secondary structure is S
 dssp_sec_str_T,Structural feature,Secondary structure is T
-phi_psi_reg_.,Structural feature,Phi-psi is .
-phi_psi_reg_?,Structural feature,Phi-psi is ?
-phi_psi_reg_A,Structural feature,Phi-psi is A
-phi_psi_reg_B,Structural feature,Phi-psi is B
-phi_psi_reg_L,Structural feature,Phi-psi is L
-phi_psi_reg_P,Structural feature,Phi-psi is P
-phi_psi_reg_a,Structural feature,Phi-psi is a
-phi_psi_reg_b,Structural feature,Phi-psi is b
-phi_psi_reg_g,Structural feature,Phi-psi is g
-phi_psi_reg_l,Structural feature,Phi-psi is l
-phi_psi_reg_p,Structural feature,Phi-psi is p
+phi_psi_reg_.,Structural feature,Phi-psi angle region is .
+phi_psi_reg_?,Structural feature,Phi-psi angle region is ?
+phi_psi_reg_A,Structural feature,Phi-psi angle region is A
+phi_psi_reg_B,Structural feature,Phi-psi angle region is B
+phi_psi_reg_L,Structural feature,Phi-psi angle region is L
+phi_psi_reg_P,Structural feature,Phi-psi angle region is P
+phi_psi_reg_a,Structural feature,Phi-psi angle region is a
+phi_psi_reg_b,Structural feature,Phi-psi angle region is b
+phi_psi_reg_g,Structural feature,Phi-psi angle region is g
+phi_psi_reg_l,Structural feature,Phi-psi angle region is l
+phi_psi_reg_p,Structural feature,Phi-psi angle region is p
