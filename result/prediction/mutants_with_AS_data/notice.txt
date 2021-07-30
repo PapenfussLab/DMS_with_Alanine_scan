@@ -1,1 +1,0 @@
-All files in ../01_gal4_test/log/ as well as ../02_cxcr4_text/log/ are copied here.

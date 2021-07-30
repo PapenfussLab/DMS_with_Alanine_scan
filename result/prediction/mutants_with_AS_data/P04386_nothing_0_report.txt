@@ -1,10 +1,10 @@
 ----------------------------- GPyOpt Report file -----------------------------------
 GPyOpt Version 1.2.6
-Date and time:               Mon Jul 12 18:13:38 2021
-Optimization completed:      NO,369 samples collected.
+Date and time:               Sun Jul 18 21:57:00 2021
+Optimization completed:      NO,343 samples collected.
 Number initial samples:      5 
 Tolerance:                   1e-08.
-Optimization time:           165672.8293786049 seconds.
+Optimization time:           165729.7478916645 seconds.
 
 -------------------------------- Problem set up ------------------------------------
 Problem name:                no_name
