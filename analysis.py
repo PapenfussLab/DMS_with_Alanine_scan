@@ -75,10 +75,10 @@ def _read_protein_result(data_dir, uniprot_id):
         Predicted results while using alanine scanning (AS) data or not with other mutant information.
     """
     ala_result = pd.read_csv(
-        f"{data_dir}{uniprot_id}_with_ala_0_test_prediction.csv", index_col=0
+        f"{data_dir}{uniprot_id}_with_as_prediction.csv", index_col=0
     )
     noala_result = pd.read_csv(
-        f"{data_dir}{uniprot_id}_nothing_0_test_prediction.csv", index_col=0
+        f"{data_dir}{uniprot_id}_no_as_prediction.csv", index_col=0
     )
     protein_result = pd.merge(
         ala_result,
@@ -131,26 +131,11 @@ def calculate_model_performance(pred_result):
     model_perform = pd.DataFrame()
     for dmsa, df in pred_result.groupby("dmsa_id", as_index=False):
         accuracy = pd.Series()
-        accuracy["noala_rmse"] = np.sqrt(
-            mean_squared_error(df["ob_score"], df["pred_score_noala"])
-        )
-        accuracy["ala_rmse"] = np.sqrt(
-            mean_squared_error(df["ob_score"], df["pred_score_ala"])
-        )
-        accuracy["diff_rmse"] = accuracy["noala_rmse"] - accuracy["ala_rmse"]
+        accuracy["No AS"] = spearmanr(df["ob_score"], df["pred_score_noala"])[0]
+        accuracy["With AS"] = spearmanr(df["ob_score"], df["pred_score_ala"])[0]
+        accuracy["diff_spear"] = accuracy["With AS"] - accuracy["No AS"]
         accuracy["size"] = len(df)
-        accuracy = accuracy.append(
-            df[
-                [
-                    "uniprot_id",
-                    "protein_name",
-                    "dms_id",
-                    "dms_name",
-                    "Ascan_id",
-                    "dmsa_id",
-                ]
-            ].iloc[0]
-        )
+        accuracy['dmsa_id'] = df["dmsa_id"].iloc[0]
         model_perform = model_perform.append(accuracy, ignore_index=True)
     return model_perform
 

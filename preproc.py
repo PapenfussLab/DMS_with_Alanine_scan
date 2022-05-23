@@ -25,7 +25,7 @@ def _impute_missing_value(data, how):
     return impute_result
 
 
-def _encode_categorical_feature(data, encoder_file=None):
+def encode_categorical_feature(data, encoder_file=None):
     """Transform categorical features into one hot sparse matrix.
 
     The function will change the input columns to a one hot sparse DataFrame whose columns
@@ -46,7 +46,7 @@ def _encode_categorical_feature(data, encoder_file=None):
 
     Example
     -------
-    >>> _encode_categorical_feature(pd.DataFrame({'one':['a', 'b'], 'two': ['A', 'B']}))
+    >>> encode_categorical_feature(pd.DataFrame({'one':['a', 'b'], 'two': ['A', 'B']}))
            one_a  one_b  two_A  two_B
     0    1.0    0.0    1.0    0.0
     1    0.0    1.0    0.0    1.0
@@ -89,17 +89,18 @@ def impute_encode_features(
     Returns
     -------
     clean_data: pd.DataFrame
-    list:
-        A list of numerical and encoded categorical feature names.
+    encoded_feat_col: list
+        A list of encoded categorical feature names.
     """
     work_data = data.copy().reset_index(drop=True)
     work_data[numer_feat] = _impute_missing_value(work_data[numer_feat], "mean")
     work_data[categ_feat] = _impute_missing_value(
         work_data[categ_feat], "most_frequent"
     )
-    encode_result = _encode_categorical_feature(work_data[categ_feat], encoder_file)
+    encode_result = encode_categorical_feature(work_data[categ_feat], encoder_file)
     clean_data = pd.concat([work_data.drop(categ_feat, axis=1), encode_result], axis=1)
     clean_data.index = data.index
     if retain_col:
         clean_data[retain_col] = data[retain_col]
-    return clean_data
+    encoded_feat_col = list(encode_result.columns)
+    return clean_data, encoded_feat_col

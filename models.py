@@ -283,7 +283,7 @@ def save_compared_prediction(
     y_col_name,
     output_header,
     if_train=False,
-    info_col=["dms_id", "position", "aa2"],
+    info_col=["dmsa_id", "position", "aa2"],
 ):
     """Save a DataFrame of predicted and observed scores and some other information for each mutant.
 
@@ -362,3 +362,30 @@ def monitor_process(directory, log_text, indention):
     with open(f"{directory}log.txt", "a+") as file:
         file.write(f"{' ' * 2 * indention}{log_text} at: {present} (UTC)\n")
     return
+
+
+def refit_matrix_score(train_data, test_data):
+    """Calculate substitution matrix score in DeMaSk from training data and fit them to modelling data.
+
+    Parameters
+    ----------
+    train_data: pd.DataFrame
+        Training data which are used to calculate substitution matrix score.
+    test_data: pd.DataFrame
+        Testing data.
+
+    Returns
+    -------
+    train_data_refit: pd.DataFrame
+        Training data with recalculated matrix feature values.
+    test_data_refit: pd.DataFrame
+        Testing data with recalculated matrix feature values.
+    """
+    # Aviod duplications because of multiple alanine scanning.
+    pure_dms = train_data.groupby(['dms_id', 'position', 'aa2']).first()
+    matrix_map = pure_dms.groupby('sub_type')['score'].mean()
+    train_data_refit = train_data.copy()
+    train_data_refit['matrix'] = train_data_refit['sub_type'].map(matrix_map)
+    test_data_refit = test_data.copy()
+    test_data_refit['matrix'] = test_data_refit['sub_type'].map(matrix_map)
+    return train_data_refit, test_data_refit
