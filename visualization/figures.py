@@ -198,7 +198,7 @@ def plot_roc_curve_on_axes(ax, labels, *data_pairs):
 
     # Make ROC plot.
     for i in range(len(fpr)):
-        ax.plot(fpr[i], tpr[i], lw=2, label=f"{labels[i]} (area = {roc_auc[i]})")
+        ax.plot(fpr[i], tpr[i], lw=2, label=f"{labels[i]} (AUC = {roc_auc[i]})")
     ax.plot([0, 1], [0, 1], color="k", lw=2, linestyle="--", label="Baseline")
     ax.set_xlim([0.0, 1.0])
     ax.set_ylim([0.0, 1.0])
