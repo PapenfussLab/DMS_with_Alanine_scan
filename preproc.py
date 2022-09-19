@@ -12,7 +12,8 @@ def _impute_missing_value(data, how):
     data: pd.DataFrame
         Data with missing values.
     how: str, 'mean' or 'most_frequent'
-        Way to impute the missing values, by either mean or most frequent value.
+        Way to impute the missing values, by either mean or most frequent value. However,
+        the 'most_frequent' method seems to be too slow, so not recommended.
 
     Returns
     -------
@@ -94,9 +95,7 @@ def impute_encode_features(
     """
     work_data = data.copy().reset_index(drop=True)
     work_data[numer_feat] = _impute_missing_value(work_data[numer_feat], "mean")
-    work_data[categ_feat] = _impute_missing_value(
-        work_data[categ_feat], "most_frequent"
-    )
+    work_data[categ_feat] = work_data[categ_feat].fillna(work_data[categ_feat].mode().iloc[0])
     encode_result = encode_categorical_feature(work_data[categ_feat], encoder_file)
     clean_data = pd.concat([work_data.drop(categ_feat, axis=1), encode_result], axis=1)
     clean_data.index = data.index
