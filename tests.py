@@ -12,7 +12,7 @@ import unittest
 
 
 class TestPreprocessing(unittest.TestCase):
-    def test_01_impute_missing_value(self):
+    def test_01_impute_missing_value_1(self):
         categ_data = pd.DataFrame(
             {"1": ["a", "b", np.nan, "b", np.nan], "2": ["B", np.nan, "B", "A", "B"]}
         )
@@ -22,6 +22,7 @@ class TestPreprocessing(unittest.TestCase):
         )
         assert_frame_equal(result, expect)
 
+    def test_02_impute_missing_value_2(self):
         numer_data = pd.DataFrame(
             {"a": [1, 2, np.nan, 3, np.nan], "b": [2.3, np.nan, 0.4, 1.4, 2.3]}
         )
@@ -31,6 +32,7 @@ class TestPreprocessing(unittest.TestCase):
         )
         assert_frame_equal(result, expect)
 
+    def test_03_impute_missing_value_3(self):
         mix_data = pd.DataFrame(
             {
                 "1": ["a", "b", np.nan, "a", np.nan],
@@ -52,7 +54,7 @@ class TestPreprocessing(unittest.TestCase):
         )
         assert_frame_equal(result, expect)
 
-    def test_02_encode_categorical_feature(self):
+    def test_04_encode_categorical_feature_1(self):
         categ_data = pd.DataFrame(
             {"1": ["a", "b", "b", "b", "b"], "2": ["B", "B", "B", "A", "B"]},
             index=[1, 2, 3, 4, 0],
@@ -70,6 +72,7 @@ class TestPreprocessing(unittest.TestCase):
         assert_frame_equal(result, expect)
         self.assertEqual(encoded_col, ["1_a", "1_b", "2_A", "2_B"])
 
+    def test_05_encode_categorical_feature_2(self):
         mix_data = pd.DataFrame(
             {
                 "1": ["a", "b", "b", "b", "b"],
@@ -96,7 +99,6 @@ class TestPreprocessing(unittest.TestCase):
             index=[1, 2, 3, 4, 0],
         )
         assert_frame_equal(result, expect)
-        self.assertEqual(encoded_col, ["2_A", "2_B", "1_a", "1_b"])
         self.assertEqual(encoded_col, ["2_A", "2_B", "1_a", "1_b"])
 
 
@@ -199,7 +201,7 @@ class TestTuning(unittest.TestCase):
         self.trainx = np.random.rand(n_sample, n_feature)
         self.trainy = [5] * n_sample
 
-    def test_01__create_hp_dict(self):
+    def test_01__create_hp_dict_1(self):
         search_space_01 = [
             {
                 "name": "constant",
@@ -212,6 +214,7 @@ class TestTuning(unittest.TestCase):
         expect = {"constant": 1}
         self.assertEqual(result, expect)
 
+    def test_02__create_hp_dict_2(self):
         search_space_01 = [
             {
                 "name": "constant",
@@ -224,7 +227,7 @@ class TestTuning(unittest.TestCase):
         expect = {"constant": 3.1}
         self.assertEqual(result, expect)
 
-    def test_02__create_evaluation_function(self):
+    def test_03__create_evaluation_function_1(self):
         func = tune._create_evaluation_function(
             self.search_space,
             self.estimator,
@@ -235,6 +238,7 @@ class TestTuning(unittest.TestCase):
         result = func([[5]])
         self.assertEqual(result, 0.0)
 
+    def test_04__create_evaluation_function_2(self):
         func = tune._create_evaluation_function(
             self.search_space,
             self.estimator,
@@ -245,7 +249,7 @@ class TestTuning(unittest.TestCase):
         result = func([[3]])
         self.assertEqual(result, -4.0)
 
-    def test_03__tune_by_gpyopt(self):
+    def test_05__tune_by_gpyopt(self):
         eval_hp_func = tune._create_evaluation_function(
             self.search_space,
             self.estimator,
@@ -259,7 +263,7 @@ class TestTuning(unittest.TestCase):
         expect = {"constant": 5}
         self.assertEqual(result, expect)
 
-    def test_04_fit_best_estimator(self):
+    def test_06_fit_best_estimator(self):
         result = tune.fit_best_estimator(
             self.search_space,
             self.estimator,

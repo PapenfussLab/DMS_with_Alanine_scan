@@ -3,13 +3,3 @@
 *.ipynb_checkpoints/*
 jupyter_code/.ipynb_checkpoints/
 history/
-/result/prediction/linear_as/all_as/*
-/result/prediction/linear_as/high+med_as/*
-/result/prediction/linear_as/correlate_as/*
-/result/prediction/linear_as/compatible_as/*
-/result/prediction/alternative_models/dms-ala_train/*
-/result/prediction/alternative_models/boosting/*
-/result/prediction/alternative_models/simulated_scan/*
-/result/prediction/alternative_models/envision/full_envision/*
-/result/prediction/alternative_models/envision/demask_comparison/*
-/result/prediction/alternative_models/envision/trial/*
