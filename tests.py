@@ -255,7 +255,7 @@ class TestTuning(unittest.TestCase):
             self.estimator,
             self.trainx,
             self.trainy,
-            {"scoring": "neg_mean_squared_error"},
+            {"scoring": "neg_mean_squared_error", "cv": 3},
         )
         result = tune._tune_by_gpopt(
             self.search_space, eval_hp_func, 6, 1, True, random_seed=0
@@ -271,6 +271,7 @@ class TestTuning(unittest.TestCase):
             self.trainy,
             {
                 "scoring": "neg_mean_squared_error",
+                "cv": 3,
                 "fit_params": {"sample_weight": None},
             },
             {
