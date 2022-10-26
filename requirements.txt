@@ -1,3 +1,4 @@
+requests==2.27.1
 numpy==1.18.1
 pandas==0.25.1
 GPyOpt==1.2.6

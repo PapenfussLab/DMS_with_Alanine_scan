@@ -1,5 +1,6 @@
 """Testing code."""
 
+import mavedb_tool as mtool
 import preproc as preproc
 import train as train
 import analysis as ana
@@ -9,6 +10,330 @@ import pandas as pd
 from pandas.testing import assert_frame_equal
 from sklearn.dummy import DummyRegressor
 import unittest
+
+
+class TestMaveDBTool(unittest.TestCase):
+    def test_01__clean_mavedb_scores(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Cys",
+                    "p.Cys39Ala",
+                    "p.Met1Cys",
+                    "p.Cys2Ala",
+                    "p.Met1Cys",
+                    "p.Arg23His",
+                    "p.Cys39Ala",
+                ],
+                "score": [3, 1, 19, 7, np.nan, np.nan, 1.2],
+            },
+            index=[7, 6, 5, 4, 3, 2, 1],
+        )
+        result = mtool.clean_mavedb_scores(ori_data)
+        expect = pd.DataFrame(
+            {
+                "hgvs_pro": ["p.Cys2Ala", "p.Cys39Ala", "p.Met1Cys"],
+                "score": [7, 1.1, 11],
+            },
+            index=[0, 1, 2],
+        )
+        assert_frame_equal(result, expect)
+
+    def test_02__is_single_hgvs_pro_variant_1(self):
+        result = mtool._is_single_hgvs_pro_variant("p.Cys28delinsTrpVal")
+        expect = False
+        self.assertEqual(result, expect)
+
+    def test_03__is_single_hgvs_pro_variant_2(self):
+        result = mtool._is_single_hgvs_pro_variant("p.[Cys2Ala;Asp5Glu]")
+        expect = False
+        self.assertEqual(result, expect)
+
+    def test_04__is_single_hgvs_pro_variant_3(self):
+        result = mtool._is_single_hgvs_pro_variant("p.Ter337Ala")
+        expect = False
+        self.assertEqual(result, expect)
+
+    def test_05__is_single_hgvs_pro_variant_4(self):
+        result = mtool._is_single_hgvs_pro_variant("p.Asn234Thrfs")
+        expect = False
+        self.assertEqual(result, expect)
+
+    def test_06__is_single_hgvs_pro_variant_5(self):
+        result = mtool._is_single_hgvs_pro_variant("p.Met1?")
+        expect = False
+        self.assertEqual(result, expect)
+
+    def test_07__is_single_hgvs_pro_variant_6(self):
+        result = mtool._is_single_hgvs_pro_variant("p.Arg37Met")
+        expect = True
+        self.assertEqual(result, expect)
+
+    def test_08__annotate_singe_hgvs_pro_variant_1(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.Lys119*")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "nonsense"])
+        self.assertEqual(results, expect)
+
+    def test_09__annotate_singe_hgvs_pro_variant_2(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.His2537Ter")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "nonsense"])
+        self.assertEqual(results, expect)
+
+    def test_10__annotate_singe_hgvs_pro_variant_3(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.Asn2del")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "deletion"])
+        self.assertEqual(results, expect)
+
+    def test_11__annotate_singe_hgvs_pro_variant_4(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.Met1=")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "synonymous"])
+        self.assertEqual(results, expect)
+
+    def test_12__annotate_singe_hgvs_pro_variant_5(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.=")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "synonymous"])
+        self.assertEqual(results, expect)
+
+    def test_13__annotate_singe_hgvs_pro_variant_6(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.(=)")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "synonymous"])
+        self.assertEqual(results, expect)
+
+    def test_14__annotate_singe_hgvs_pro_variant_7(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("_wt")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "synonymous"])
+        self.assertEqual(results, expect)
+
+    def test_15__annotate_singe_hgvs_pro_variant_8(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("_sy")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "synonymous"])
+        self.assertEqual(results, expect)
+
+    def test_16__annotate_singe_hgvs_pro_variant_9(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.Val14Val")
+        expect = tuple(["np.nan", "np.nan", "np.nan", "synonymous"])
+        self.assertEqual(results, expect)
+
+    def test_17__annotate_singe_hgvs_pro_variant_10(self):
+        results = mtool._annotate_singe_hgvs_pro_variant("p.Arg38Pro")
+        expect = tuple(["R", "P", 38, "missense"])
+        self.assertEqual(results, expect)
+
+    def test_18_annotate_mavedb_sav_data(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Tyr",
+                    "p.Leu24*",
+                    "p.Ter337Ala",
+                    "p.Phe55Ser",
+                    "p.[Cys3Try;Gln22Glu;Lys32Ile]",
+                    "p.Asn234Thrfs",
+                    "p.Thr25Thr",
+                    "_wt",
+                ]
+            },
+            index=[7, 4, 8, 29, 31, 0, 74, 55],
+        )
+        result = mtool.annotate_mavedb_sav_data(ori_data)
+        expect = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Tyr",
+                    "p.Leu24*",
+                    "p.Ter337Ala",
+                    "p.Phe55Ser",
+                    "p.[Cys3Try;Gln22Glu;Lys32Ile]",
+                    "p.Asn234Thrfs",
+                    "p.Thr25Thr",
+                    "_wt",
+                ],
+                "position": [
+                    1,
+                    "np.nan",
+                    "np.nan",
+                    55,
+                    "np.nan",
+                    "np.nan",
+                    "np.nan",
+                    "np.nan",
+                ],
+                "aa1": [
+                    "M",
+                    "np.nan",
+                    "np.nan",
+                    "F",
+                    "np.nan",
+                    "np.nan",
+                    "np.nan",
+                    "np.nan",
+                ],
+                "aa2": [
+                    "Y",
+                    "np.nan",
+                    "np.nan",
+                    "S",
+                    "np.nan",
+                    "np.nan",
+                    "np.nan",
+                    "np.nan",
+                ],
+                "mut_type": [
+                    "missense",
+                    "nonsense",
+                    "other",
+                    "missense",
+                    "other",
+                    "other",
+                    "synonymous",
+                    "synonymous",
+                ],
+            },
+            index=[7, 4, 8, 29, 31, 0, 74, 55],
+        )
+        assert_frame_equal(result, expect)
+
+    def test_19_get_dms_wiltype_like_score_1(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": ["p.Met1Cys", "p.Cys39Ala", "p.Cys2Ala", "p.Arg23His"],
+                "mut_type": ["missense", "missense", "missense", "missense"],
+                "score": [1, 2, 3, 4],
+            }
+        )
+        result = mtool.get_dms_wiltype_like_score(ori_data)
+        expect = np.nan
+        np.testing.assert_equal(result, expect)
+
+    def test_20_get_dms_wiltype_like_score_2(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Cys",
+                    "p.Cys39Ala",
+                    "p.=",
+                    "p.Cys2Ala",
+                    "p.Arg23His",
+                ],
+                "mut_type": [
+                    "missense",
+                    "missense",
+                    "synonymous",
+                    "missense",
+                    "missense",
+                ],
+                "score": [1, 2, 100, 3, 4],
+            }
+        )
+        result = mtool.get_dms_wiltype_like_score(ori_data)
+        expect = 100
+        self.assertEqual(result, expect)
+
+    def test_21_get_dms_wiltype_like_score_3(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Cys",
+                    "_sy",
+                    "p.Cys39Ala",
+                    "p.Cys2Ala",
+                    "_wt",
+                    "p.Arg23His",
+                ],
+                "mut_type": [
+                    "missense",
+                    "synonymous",
+                    "missense",
+                    "missense",
+                    "synonymous",
+                    "missense",
+                ],
+                "score": [1, 100, 2, 3, 101, 4],
+            }
+        )
+        result = mtool.get_dms_wiltype_like_score(ori_data)
+        expect = 101
+        self.assertEqual(result, expect)
+
+    def test_22_get_dms_wiltype_like_score_4(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Cys",
+                    "p.=",
+                    "p.Cys39Ala",
+                    "p.Cys2Ala",
+                    "p.(=)",
+                    "p.Arg23His",
+                ],
+                "mut_type": [
+                    "missense",
+                    "synonymous",
+                    "missense",
+                    "missense",
+                    "synonymous",
+                    "missense",
+                ],
+                "score": [1, 100, 2, 3, 101, 4],
+            }
+        )
+        result = mtool.get_dms_wiltype_like_score(ori_data)
+        expect = 100
+        self.assertEqual(result, expect)
+
+    def test_23_get_dms_wiltype_like_score_5(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Cys",
+                    "p.Cys39Ala",
+                    "p.Cys39Cys",
+                    "p.Cys2Ala",
+                    "p.Arg23His",
+                    "p.Met1=",
+                ],
+                "mut_type": [
+                    "missense",
+                    "missense",
+                    "synonymous",
+                    "missense",
+                    "missense",
+                    "synonymous",
+                ],
+                "score": [1, 2, 102, 3, 4, 100],
+            }
+        )
+        result = mtool.get_dms_wiltype_like_score(ori_data)
+        expect = 101
+        self.assertEqual(result, expect)
+
+    def test_24_get_dms_wiltype_like_score_6(self):
+        ori_data = pd.DataFrame(
+            {
+                "hgvs_pro": [
+                    "p.Met1Cys",
+                    "p.Cys39Ala",
+                    "_wt",
+                    "p.Cys39Cys",
+                    "p.Cys2Ala",
+                    "p.Arg23His",
+                    "p.Met1=",
+                ],
+                "mut_type": [
+                    "missense",
+                    "missense",
+                    "synonymous",
+                    "synonymous",
+                    "missense",
+                    "missense",
+                    "synonymous",
+                ],
+                "score": [1, 2, 103, 102, 3, 4, 100],
+            }
+        )
+        result = mtool.get_dms_wiltype_like_score(ori_data)
+        expect = 103
+        self.assertEqual(result, expect)
 
 
 class TestPreprocessing(unittest.TestCase):
@@ -100,6 +425,42 @@ class TestPreprocessing(unittest.TestCase):
         )
         assert_frame_equal(result, expect)
         self.assertEqual(encoded_col, ["2_A", "2_B", "1_a", "1_b"])
+
+    def test_06_normalize_dms_score_1(self):
+        data = pd.DataFrame(
+            {"score": [7, -5, -1, 2], "id": ["v1", "v3", "v5", "v2"]},
+            index=[1, 3, 5, 2],
+        )
+        result = preproc.normalize_dms_score(data, -1, "negative")
+        expect = pd.DataFrame(
+            {"score": [3, 0, 1, 1.75], "id": ["v1", "v3", "v5", "v2"]},
+            index=[1, 3, 5, 2],
+        )
+        pd.testing.assert_frame_equal(expect, result)
+
+    def test_07_normalize_dms_score_2(self):
+        data = pd.DataFrame(
+            {"score": [7, -5, -1, 2], "id": ["v1", "v3", "v5", "v2"]},
+            index=[1, 3, 5, 2],
+        )
+        result = preproc.normalize_dms_score(data, 2, "positive")
+        expect = pd.DataFrame(
+            {"score": [0, 2.4, 1.6, 1], "id": ["v1", "v3", "v5", "v2"]},
+            index=[1, 3, 5, 2],
+        )
+        pd.testing.assert_frame_equal(expect, result)
+
+    def test_08_normalize_dms_score_3(self):
+        data = pd.DataFrame({"score": np.arange(1000)})
+        result = preproc.normalize_dms_score(data, 900, "negative")
+        expect = pd.DataFrame({"score": (np.arange(1000) - 5) / 895})
+        pd.testing.assert_frame_equal(expect, result)
+
+    def test_09_normalize_dms_score_4(self):
+        data = pd.DataFrame({"score": np.arange(2000)})
+        result = preproc.normalize_dms_score(data, 300, "positive")
+        expect = pd.DataFrame({"score": (1989 - np.arange(2000)) / 1689})
+        pd.testing.assert_frame_equal(expect, result)
 
 
 class TestTraining(unittest.TestCase):

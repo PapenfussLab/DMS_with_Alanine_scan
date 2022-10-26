@@ -1,8 +1,42 @@
-"""Preprocess data with imputation and feature encoding."""
+"""Preprocess data for normalisation, imputation and feature encoding."""
 
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
+
+
+def normalize_dms_score(input_data, wt_score, non_score):
+    """Normalize DMS data by its wildtype-like and nonsense-like variant scores.
+
+    Parameters
+    ----------
+    input_data: pd.DataFrame
+        Contains at least the score column of a DMS dataset to be normalized.
+    wt_score: float or int
+        DMS scores for wildtype-like variants.
+    non_score: 'positive' or 'negative'
+        'positive' means nonsene-like variants should have higher scores, and 'negative' means
+        nonsense-like variants should have lower scores.
+
+    Return
+    ------
+    output_data: pd.DataFrame
+        Data with normalized scores.
+    """
+    output_data = input_data.copy()
+    percentile = (
+        int(len(output_data) * 0.01) + 1
+    )  # Plus 1 to avoid issue on small datasets.
+    if non_score == "positive":
+        lower_bound = (
+            output_data["score"].sort_values(ascending=False).iloc[:percentile].median()
+        )
+    else:
+        lower_bound = output_data["score"].sort_values().iloc[:percentile].median()
+    output_data["score"] = 1 - (output_data["score"] - wt_score) / (
+        lower_bound - wt_score
+    )
+    return output_data
 
 
 def impute_missing_value(data, categ_feat, numer_feat):
