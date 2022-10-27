@@ -1,0 +1,7 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2446,cbs_kruger_activity,wt,wt,100,wt,P35520,wt,
+2447,cbs_kruger_activity,non,non,0,non,P35520,non,Defined by logic
+2448,cbs_kruger_activity,I,278,2.4,T,P35520,278,
+2449,cbs_kruger_activity,V,320,36,A,P35520,320,
+2450,cbs_kruger_activity,A,226,13,T,P35520,226,
+2451,cbs_kruger_activity,Q,526,4.4,K,P35520,526,

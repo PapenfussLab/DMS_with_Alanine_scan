@@ -1,0 +1,5 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2263,ube2i_luciferase_back1,non,non,0.997499999999999,non,P63279,non,
+2264,ube2i_luciferase_back1,wt,wt,2.7825,wt,P63279,wt,
+2265,ube2i_luciferase_back1,P,128,2.8525,A,P63279,128,
+2266,ube2i_luciferase_back1,Y,134,2.9925,A,P63279,134,

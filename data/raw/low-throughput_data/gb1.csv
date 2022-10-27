@@ -1,0 +1,11 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+0,gb1,non,non,4.9,non,P06654,non,largest
+1,gb1,wt,wt,0,wt,P06654,wt,
+2,gb1,T,25,0.24,A,P06654,251,
+3,gb1,E,27,4.9,A,P06654,253,larger than 4.9
+4,gb1,K,28,1.3,A,P06654,254,
+5,gb1,K,31,3.5,A,P06654,257,
+6,gb1,N,35,2.4,A,P06654,261,
+7,gb1,D,40,0.3,A,P06654,266,
+8,gb1,E,42,0.4,A,P06654,268,
+9,gb1,W,43,3.8,A,P06654,269,

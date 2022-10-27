@@ -1,0 +1,9 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2188,cxcr4_peng_exp,wt,wt,100,wt,P61073,wt,
+2189,cxcr4_peng_exp,non,non,0,non,P61073,non,Defined by logic
+2190,cxcr4_peng_exp,A,175,50,D,P61073,175,
+2191,cxcr4_peng_exp,E,179,123,A,P61073,179,
+2192,cxcr4_peng_exp,A,180,100,D,P61073,180,
+2193,cxcr4_peng_exp,D,182,110,A,P61073,182,
+2194,cxcr4_peng_exp,D,181,130,A,P61073,181,
+2195,cxcr4_peng_exp,P,191,141,A,P61073,191,

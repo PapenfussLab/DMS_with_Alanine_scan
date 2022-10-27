@@ -1,0 +1,7 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+0,ras_yoshi_outgrowth,non,non,0.0,non,P01112,non,
+1,ras_yoshi_outgrowth,wt,wt,66.2509505703422,wt,P01112,wt,
+2,ras_yoshi_outgrowth,K,42,4.86692015209125,A,P01112,42,
+3,ras_yoshi_outgrowth,V,45,3.5893536121673,E,P01112,45,
+4,ras_yoshi_outgrowth,G,48,5.29277566539923,C,P01112,48,
+5,ras_yoshi_outgrowth,L,53,19.2851711026615,A,P01112,53,

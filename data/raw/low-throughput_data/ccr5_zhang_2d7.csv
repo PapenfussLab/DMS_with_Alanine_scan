@@ -1,0 +1,10 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+840,ccr5_zhang_2d7,non,non,0,non,P51681,non,
+841,ccr5_zhang_2d7,wt,wt,100,wt,P51681,wt,
+842,ccr5_zhang_2d7,Y,3,101,A,P51681,3,
+843,ccr5_zhang_2d7,S,6,100,A,P51681,6,
+844,ccr5_zhang_2d7,S,7,99,A,P51681,7,
+845,ccr5_zhang_2d7,I,9,104,A,P51681,9,
+846,ccr5_zhang_2d7,K,171,0,A,P51681,171,
+847,ccr5_zhang_2d7,E,172,0,A,P51681,172,
+848,ccr5_zhang_2d7,W,190,10,A,P51681,190,

@@ -1,0 +1,7 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+3061,cxcr4_chabot_cys_4g10,non,non,0,non,P61073,non,Defined by logic
+3062,cxcr4_chabot_cys_4g10,wt,wt,100,wt,P61073,wt,
+3063,cxcr4_chabot_cys_4g10,C,28,112,A,P61073,28,
+3064,cxcr4_chabot_cys_4g10,C,109,0,A,P61073,109,
+3065,cxcr4_chabot_cys_4g10,C,186,0,A,P61073,186,
+3066,cxcr4_chabot_cys_4g10,C,274,108,A,P61073,274,

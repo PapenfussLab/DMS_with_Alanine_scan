@@ -1,0 +1,5 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2245,ube2i_bret,non,non,0,non,P63279,non,
+2246,ube2i_bret,wt,wt,83.1521739130434,wt,P63279,wt,
+2247,ube2i_bret,C,93,71.7391304347826,S,P63279,93,
+2248,ube2i_bret,C,93,76.0869565217391,A,P63279,93,

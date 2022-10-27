@@ -1,0 +1,13 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+391,raf1_kd_lowionic,non,non,100,non,P04049,non,largest
+392,raf1_kd_lowionic,wt,wt,0.02,wt,P04049,wt,
+393,raf1_kd_lowionic,N,64,0.15,A,P04049,64,
+394,raf1_kd_lowionic,K,65,0.26,A,P04049,65,
+395,raf1_kd_lowionic,K,65,0.3,E,P04049,65,
+396,raf1_kd_lowionic,K,65,0.11,M,P04049,65,
+397,raf1_kd_lowionic,V,69,0.25,A,P04049,69,
+398,raf1_kd_lowionic,T,68,0.45,A,P04049,68,
+399,raf1_kd_lowionic,R,67,0.6,A,P04049,67,
+400,raf1_kd_lowionic,R,59,1.2,A,P04049,59,
+401,raf1_kd_lowionic,Q,66,1.3,A,P04049,66,
+402,raf1_kd_lowionic,K,84,5,A,P04049,84,

@@ -1,0 +1,6 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+1613,gcn4_arg5,non,non,0.309279132380266,non,P03069,non,
+1614,gcn4_arg5,wt,wt,1,wt,P03069,wt,
+1615,gcn4_arg5,W,120,0.409427022107618,A,P03069,120,
+1616,gcn4_arg5,L,123,0.53903909597664,A,P03069,123,
+1617,gcn4_arg5,F,124,0.474233059042129,A,P03069,124,

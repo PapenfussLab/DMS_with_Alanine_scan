@@ -1,0 +1,8 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2249,ube2i_luciferase_front2,non,non,1.01754385964912,non,P63279,non,
+2250,ube2i_luciferase_front2,wt,wt,3.80701754385964,wt,P63279,wt,
+2251,ube2i_luciferase_front2,C,93,3.50877192982456,S,P63279,93,
+2252,ube2i_luciferase_front2,K,14,4.28070175438596,R,P63279,14,
+2253,ube2i_luciferase_front2,P,69,2.73684210526315,A,P63279,69,
+2254,ube2i_luciferase_front2,R,17,0.999999999999999,A,P63279,17,
+2255,ube2i_luciferase_front2,H,20,1.17543859649122,D,P63279,20,

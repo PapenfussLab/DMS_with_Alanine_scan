@@ -1,0 +1,8 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+52,sumo1_galtat,non,non,211.139896373056,non,P63165,non,largest
+53,sumo1_galtat,wt,wt,38.2124352331606,wt,P63165,wt,
+54,sumo1_galtat,T,42,52.461139896373,A,P63165,42,
+55,sumo1_galtat,R,54,69.300518134715,A,P63165,54,
+56,sumo1_galtat,K,39,103.626943005181,A,P63165,39,
+57,sumo1_galtat,K,46,99.740932642487,A,P63165,46,
+58,sumo1_galtat,K,37,170.984455958549,A,P63165,37,

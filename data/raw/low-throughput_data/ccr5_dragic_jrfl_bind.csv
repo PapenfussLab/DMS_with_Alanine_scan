@@ -1,0 +1,6 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+3020,ccr5_dragic_jrfl_bind,non,non,-0.0813559322033896,non,P51681,non,
+3021,ccr5_dragic_jrfl_bind,wt,wt,5.77627118644067,wt,P51681,wt,
+3022,ccr5_dragic_jrfl_bind,D,2,1.73559322033898,A,P51681,2,
+3023,ccr5_dragic_jrfl_bind,D,11,0.488135593220339,A,P51681,11,
+3024,ccr5_dragic_jrfl_bind,E,18,-0.0271186440677965,A,P51681,18,

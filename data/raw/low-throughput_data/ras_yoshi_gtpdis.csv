@@ -1,0 +1,8 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+232,ras_yoshi_gtpdis,non,non,21.2,non,P01112,non,largest
+233,ras_yoshi_gtpdis,wt,wt,4.4,wt,P01112,wt,
+234,ras_yoshi_gtpdis,K,42,4.6,A,P01112,42,
+235,ras_yoshi_gtpdis,I,46,6.7,A,P01112,46,
+236,ras_yoshi_gtpdis,G,48,4.3,A,P01112,48,
+237,ras_yoshi_gtpdis,E,49,4.1,A,P01112,49,
+238,ras_yoshi_gtpdis,L,53,21.2,A,P01112,53,

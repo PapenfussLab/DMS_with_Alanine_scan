@@ -1,0 +1,10 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2308,calm1_met_rate_egta_h7,wt,wt,29.076923076923,wt,P0DP23,wt,
+2309,calm1_met_rate_egta_h7,non,non,1.07692307692307,non,P0DP23,non,
+2310,calm1_met_rate_egta_h7,D,118,11.2307692307692,A,P0DP23,119,
+2311,calm1_met_rate_egta_h7,E,119,29.076923076923,A,P0DP23,120,
+2312,calm1_met_rate_egta_h7,E,120,4.46153846153845,A,P0DP23,121,
+2313,calm1_met_rate_egta_h7,D,122,16.9230769230769,A,P0DP23,123,
+2314,calm1_met_rate_egta_h7,E,123,28.7692307692307,A,P0DP23,124,
+2315,calm1_met_rate_egta_h7,R,126,16.7692307692307,A,P0DP23,127,
+2316,calm1_met_rate_egta_h7,E,127,13.2307692307692,A,P0DP23,128,

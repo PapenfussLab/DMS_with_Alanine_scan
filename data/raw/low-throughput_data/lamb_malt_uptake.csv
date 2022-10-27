@@ -1,0 +1,9 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+3031,lamb_malt_uptake,non,non,0,non,P02943,non,Defined by logic
+3032,lamb_malt_uptake,wt,wt,5.73404255319149,wt,P02943,wt,
+3033,lamb_malt_uptake,W,74,1.76241134751772,A,P02943,99,
+3034,lamb_malt_uptake,Y,41,0.868794326241134,A,P02943,66,
+3035,lamb_malt_uptake,Y,118,0.322695035460993,A,P02943,143,
+3036,lamb_malt_uptake,W,420,0.24822695035461,A,P02943,445,
+3037,lamb_malt_uptake,W,358,1.86170212765957,A,P02943,383,
+3038,lamb_malt_uptake,F,227,2.50709219858156,A,P02943,252,

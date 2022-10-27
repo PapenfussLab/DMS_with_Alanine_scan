@@ -1,0 +1,7 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+3006,cbs_singh_400,wt,wt,100,wt,P35520,wt,
+3007,cbs_singh_400,non,non,0,non,P35520,non,Defined by logic
+3008,cbs_singh_400,I,278,29.7619047619047,T,P35520,278,
+3009,cbs_singh_400,Q,526,84.6088435374149,K,P35520,526,
+3010,cbs_singh_400,K,102,94.812925170068,Q,P35520,102,
+3011,cbs_singh_400,V,320,98.2142857142857,A,P35520,320,

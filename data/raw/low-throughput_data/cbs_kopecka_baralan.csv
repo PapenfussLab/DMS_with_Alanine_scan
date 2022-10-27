@@ -1,0 +1,14 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2900,cbs_kopecka_baralan,R,266,15.3846153846153,K,P35520,266,
+2901,cbs_kopecka_baralan,P,422,39.9999999999999,L,P35520,422,
+2902,cbs_kopecka_baralan,R,369,3.07692307692309,C,P35520,369,
+2903,cbs_kopecka_baralan,A,114,64.6153846153846,V,P35520,114,
+2904,cbs_kopecka_baralan,P,78,9.23076923076922,R,P35520,78,
+2905,cbs_kopecka_baralan,R,125,3.07692307692309,Q,P35520,125,
+2906,cbs_kopecka_baralan,K,102,6.15384615384612,N,P35520,102,
+2907,cbs_kopecka_baralan,V,180,9.23076923076922,A,P35520,180,
+2908,cbs_kopecka_baralan,P,49,110.76923076923,L,P35520,49,
+2909,cbs_kopecka_baralan,E,302,98.4615384615384,K,P35520,302,
+2910,cbs_kopecka_baralan,S,466,243.076923076923,L,P35520,466,
+2911,cbs_kopecka_baralan,wt,wt,101.538461538461,wt,P35520,wt,
+2912,cbs_kopecka_baralan,non,non,0,non,P35520,non,Defined by logic

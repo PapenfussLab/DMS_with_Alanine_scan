@@ -1,0 +1,7 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+3025,cxcr4_lin_exp6h8,non,non,0,non,P61073,non,Defined by logic
+3026,cxcr4_lin_exp6h8,wt,wt,100,wt,P61073,wt,
+3027,cxcr4_lin_exp6h8,N,176,50,A,P61073,176,
+3028,cxcr4_lin_exp6h8,E,179,46,A,P61073,179,
+3029,cxcr4_lin_exp6h8,D,181,56,A,P61073,181,
+3030,cxcr4_lin_exp6h8,D,182,44,A,P61073,182,

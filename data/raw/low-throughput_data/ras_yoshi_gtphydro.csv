@@ -1,0 +1,14 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+239,ras_yoshi_gtphydro,non,non,0.03,non,P01112,non,largest
+240,ras_yoshi_gtphydro,wt,wt,0.0132,wt,P01112,wt,
+241,ras_yoshi_gtphydro,K,42,0.0101,A,P01112,42,
+242,ras_yoshi_gtphydro,Q,43,0.0111,A,P01112,43,
+243,ras_yoshi_gtphydro,V,44,0.0121,A,P01112,44,
+244,ras_yoshi_gtphydro,V,45,0.0136,A,P01112,45,
+245,ras_yoshi_gtphydro,I,46,0.012,A,P01112,46,
+246,ras_yoshi_gtphydro,D,47,0.015,A,P01112,47,
+247,ras_yoshi_gtphydro,G,48,0.0141,A,P01112,48,
+248,ras_yoshi_gtphydro,E,49,0.0132,A,P01112,49,
+249,ras_yoshi_gtphydro,T,50,0.015,A,P01112,50,
+250,ras_yoshi_gtphydro,C,51,0.0136,A,P01112,51,
+251,ras_yoshi_gtphydro,L,53,0.0131,A,P01112,53,

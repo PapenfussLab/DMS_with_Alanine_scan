@@ -1,0 +1,9 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+1623,lamb_maltop,non,non,70,non,P02943,non,largest
+1624,lamb_maltop,wt,wt,0.07,wt,P02943,wt,
+1625,lamb_maltop,W,74,0.48,A,P02943,99,
+1626,lamb_maltop,Y,41,0.5,A,P02943,66,
+1627,lamb_maltop,Y,6,0.9,A,P02943,31,
+1628,lamb_maltop,W,358,0.07,A,P02943,383,
+1629,lamb_maltop,W,420,0.1,A,P02943,445,
+1630,lamb_maltop,F,227,0.05,A,P02943,252,

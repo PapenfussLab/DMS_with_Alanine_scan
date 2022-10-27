@@ -1,0 +1,8 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2275,calm1_met_rate,non,non,0,non,P0DP23,non,
+2276,calm1_met_rate,wt,wt,209,wt,P0DP23,wt,
+2277,calm1_met_rate,L,112,132,T,P0DP23,113,
+2278,calm1_met_rate,G,113,0,S,P0DP23,114,
+2279,calm1_met_rate,E,114,0,A,P0DP23,115,
+2280,calm1_met_rate,L,116,0,T,P0DP23,117,
+2281,calm1_met_rate,T,117,200,A,P0DP23,118,

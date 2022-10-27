@@ -1,0 +1,6 @@
+,Ascan_id,aa1,position,score,aa2,uniprot_id,u_pos,note
+2289,calm1_met_rate_cacl2_h6,non,non,0,non,P0DP23,non,Defined by logic
+2290,calm1_met_rate_cacl2_h6,wt,wt,28.8940092165898,wt,P0DP23,wt,
+2291,calm1_met_rate_cacl2_h6,R,106,28.6175115207373,A,P0DP23,107,
+2292,calm1_met_rate_cacl2_h6,H,107,29.4470046082949,A,P0DP23,108,
+2293,calm1_met_rate_cacl2_h6,T,110,29.1705069124423,R,P0DP23,111,
