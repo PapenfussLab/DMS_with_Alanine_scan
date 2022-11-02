@@ -1,5 +1,7 @@
 *.pyc
 *.DS_Store
 *.ipynb_checkpoints/*
+workspace.xml
 jupyter_code/.ipynb_checkpoints/
 history/
+src/venv/
