@@ -63,7 +63,9 @@ def clean_mavedb_scores(mavedb_data):
         Basically the same as input with but hgvs_pro values are no more duplicated.
     """
     output_data = mavedb_data[mavedb_data["score"].notna()].copy()
-    output_data = output_data.groupby("hgvs_pro", as_index=False).mean()
+    output_data = output_data.groupby("hgvs_pro", as_index=False).mean(
+        numeric_only=True
+    )
     return output_data
 
 

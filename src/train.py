@@ -53,7 +53,7 @@ def refit_matrix_score(train_data, test_data):
     """
     # Aviod duplications because of multiple alanine scanning.
     pure_dms = train_data.groupby(["dms_id", "position", "aa2"]).first()
-    matrix_map = pure_dms.groupby("sub_type")["score"].mean()
+    matrix_map = pure_dms.groupby("sub_type")["score"].mean(numeric_only=True)
     train_data_refit = train_data.copy()
     train_data_refit["matrix"] = train_data_refit["sub_type"].map(matrix_map)
     test_data_refit = test_data.copy()

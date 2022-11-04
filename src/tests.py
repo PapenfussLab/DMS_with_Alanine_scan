@@ -548,7 +548,7 @@ class TestAnalysis(unittest.TestCase):
 
 class TestTuning(unittest.TestCase):
     def setUp(self):
-        self.estimator = DummyRegressor("constant")
+        self.estimator = DummyRegressor(strategy="constant")
         self.search_space = [
             {
                 "name": "constant",

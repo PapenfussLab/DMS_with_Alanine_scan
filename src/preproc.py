@@ -109,7 +109,7 @@ def encode_categorical_feature(data, encode_col, retain_col=None):
     encoder = OneHotEncoder(sparse=False)
     encoded_result = pd.DataFrame(encoder.fit_transform(work_data[encode_col]))
     encoded_feat_col = encoded_result.columns = list(
-        encoder.get_feature_names(encode_col)
+        encoder.get_feature_names_out(encode_col)
     )
 
     encoded_data = pd.concat(
