@@ -9,7 +9,7 @@ Code stored here are used for data processing, variant impact predictor modellin
 ### Setup & usage
 
 1. Create a virtual environment with Python 3.10.6.
-2. Install required Jupyter Notebook and other pacakges according to `requirements.txt`
+2. Install Jupyter Notebook and other required pacakges according to `requirements.txt`
 3. Follow the code and instructions in the notebooks (`./jupyter_code/`).
 
 ### Notebook content
