@@ -5,5 +5,6 @@ jupyter_code/.ipynb_checkpoints/
 jupyter_code/P-1_Background_analysis.ipynb
 history/
 src/venv/
+temp/
 .idea/
 src/.idea/
