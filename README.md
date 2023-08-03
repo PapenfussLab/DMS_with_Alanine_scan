@@ -17,9 +17,13 @@ Code stored here are used for data processing, variant impact predictor modellin
 	* Download DMS data from [MaveDB](https://www.mavedb.org/)
 	* Normalize DMS and alanine scanning data
 	* Add other protein features
-* `P1_Statistics_of_curated_data`: Overview of collected mutagenesis data
+* `P1_Statistics_of_curated_data`: Overview of collected mutagenesis data:
+	* Code and figure for: __Fig 2, 3, 4__ & __S1, S14__
 * `P2_Linear_integration_of_AS_data`: Building and evaluating linear variant impact predictors using alanine scanning data as an extra feature
+	* Code and figure for: __Fig 5, 6, 7__ & __S4, S5, S9, S10, S15__
 * `P3_Alternative_modelling_options`: Building and evaluating variant impact predictors in alternative ways
+	* Code and figure for: __Fig S3, S6, S7, S8, S11, S12, S13__
+	* Code and result for all statistical testings related to: __Fig 5, S4, S5 & S6__
 
 ### Data content
 * `data_compatibility_221024.csv` is the assay compatibility data for each pair of DMS and alanine scanning dataset used in this analysis. The class of assay compatibility is manually curated according to the following decision tree:
