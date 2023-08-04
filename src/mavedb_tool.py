@@ -41,7 +41,8 @@ def download_mavedb_score(urn, directory):
         Directory to save downloaded MaveDB data.
     """
     print(f"Downloading: {urn} from MaveDB.")
-    download = requests.get(f"https://www.mavedb.org/scoreset/{urn}/scores/")
+    download = requests.get(f"https://api.mavedb.org/api/v1/score-sets/{urn}/scores",
+                            headers={'accept': 'text/csv'})
     if download.status_code != 200:  # If not able to download.
         raise Exception(f"Error, failed to download {urn} data!")
     with open(f"{directory}{urn}.csv", "w+") as file:
